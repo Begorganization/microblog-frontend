@@ -1,0 +1,22 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "microblog-frontend"
+  labels:
+    app: "microblog-frontend"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "microblog-frontend"
+  template:
+    metadata:
+      labels:
+        app: "microblog-frontend"
+    spec:
+      containers:
+        - name: "microblog-frontend"
+          image: "{{.Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: VUE_APP_BASE_API_URL
+              value: {{ .Values.backendUrl }}

@@ -1,0 +1,15 @@
+replicaCount: 1
+
+backendUrl: https://microblog-backend.example.com
+hostname: microblog-frontend.example.com
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: latest
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+
