@@ -5,4 +5,4 @@ conditions:
   - group:
       name: audience 02
     value: false
-value: true
+value: false
