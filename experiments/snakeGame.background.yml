@@ -4,4 +4,5 @@ enabled: false
 flag: snakeGame.background
 availableValues:
   - green
+  - red
 value: red
