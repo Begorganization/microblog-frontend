@@ -5,9 +5,3 @@ kind: flag-properties
 name: rox.internal.api_version
 type: Semver
 description: ""
-
-# Add the SDK (rox) to your application
-npm install rox-browser --save
-
-# For TypeScript projects, also add the types
-npm install @types/rox-browser --save
