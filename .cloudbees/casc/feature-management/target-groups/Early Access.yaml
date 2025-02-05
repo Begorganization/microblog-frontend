@@ -1,0 +1,20 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: Early Access
+
+description: Long term customers get early access.
+
+conditions:
+  allOf:
+    - anyOf:
+        - group:
+            name: MYBTG1
+    - anyOf:
+        - group:
+            name: BetaUsers
+        - group:
+            name: BetaUsers
+        - group:
+            name: BetaUsers

@@ -1,0 +1,22 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: MYBTG1
+
+description: customers with beta access 2
+
+conditions:
+  allOf:
+    - anyOf:
+        - group:
+            name: BetaUsers
+        - group:
+            name: BetaUsers
+        - group:
+            name: BetaUsers
+    - property:
+        name: userRole
+        operator: regex
+        operands:
+            - Beta

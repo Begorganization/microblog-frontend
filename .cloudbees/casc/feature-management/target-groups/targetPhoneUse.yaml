@@ -1,0 +1,17 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: targetPhoneUse
+
+description: 
+
+conditions:
+  allOf:
+    - anyOf:
+        - group:
+            name: BetaUsers
+        - group:
+            name: BetaUsers
+        - group:
+            name: BetaUsers

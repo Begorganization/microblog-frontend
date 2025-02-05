@@ -1,0 +1,10 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: manual-tg14
+
+description: tg2 desc
+
+conditions:
+  anyOf: []

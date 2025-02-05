@@ -1,0 +1,20 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: BetaUsers
+
+description: Our beta users who are going to get to see all the slightly broken new features - UPDATED12.
+
+conditions:
+  allOf:
+    - property:
+        name: orgId
+        operator: in-array
+        operands:
+            - 4bf35d02-a634-41c3-5a7e-811ece03f237
+            - 5c499b5d-ec5b-4347-736c-223df443d522
+            - c27639c4-9bbb-439a-4282-6c0a3c7f8a22
+            - b09affef-94bb-4463-65ab-a041179ac751
+            - 8509888e-d27f-44fa-46a9-29bc76f5e790
+            - new-org-id-goes-here

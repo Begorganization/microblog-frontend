@@ -1,0 +1,15 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: flag
+
+flag: test
+flagType: boolean
+description: testing has perm
+labels:
+  - l1
+  - l2
+  - l3
+
+availableValues:
+
+isPermanent: true

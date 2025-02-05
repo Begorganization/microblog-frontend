@@ -1,0 +1,16 @@
+---
+apiVersion: featuremanagement.cloudbees.io/v1alpha1
+kind: target-group
+
+name: tg1
+
+description: some description
+
+conditions:
+  allOf:
+    - property:
+        name: orgId
+        operator: in-array
+        operands:
+            - aaa
+            - sadasd
