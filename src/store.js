@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import { userList } from './utils/users'
+import posthog from 'posthog-js'
 
 const LOGIN = 'LOGIN'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -39,6 +40,8 @@ export default new Vuex.Store({
         localStorage.setItem('user', matchedUser.username)
         localStorage.setItem('token', 'true')
         commit(LOGIN_SUCCESS)
+        posthog.identify(matchedUser.username, { company: matchedUser.company })
+        posthog.capture('user_logged_in', { login_method: 'local' })
       } else {
         axios.post(`${process.env.VUE_APP_BASE_API_URL}/api/token/`, creds,
           {
@@ -50,10 +53,13 @@ export default new Vuex.Store({
             localStorage.setItem('token', response.data.access)
             dispatch('grabUser')
             commit(LOGIN_SUCCESS)
+            posthog.identify(creds.username)
+            posthog.capture('user_logged_in', { login_method: 'api' })
           })
           .catch(err => {
             console.log('error:', err)
             commit(LOGOUT)
+            posthog.capture('login_failed', { login_method: 'api' })
           })
       }
     },
@@ -66,6 +72,8 @@ export default new Vuex.Store({
         })
         .then(response => {
           console.log('User created!!!')
+          posthog.identify(creds.username)
+          posthog.capture('user_signed_up')
         })
         .catch(err => {
           console.log('error:', err)
@@ -74,6 +82,8 @@ export default new Vuex.Store({
     logout ({ commit }) {
       localStorage.removeItem('token')
       commit(LOGOUT)
+      posthog.capture('user_logged_out')
+      posthog.reset()
     },
     grabUser ({ commit }) {
       axios.get(`${process.env.VUE_APP_BASE_API_URL}/users/me/`, {

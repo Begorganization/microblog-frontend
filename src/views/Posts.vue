@@ -73,6 +73,7 @@ import Post from '@/components/Post.vue'
 import axios from 'axios'
 import { mapGetters, mapState } from 'vuex'
 import { Flags } from '../utils/flags'
+import posthog from 'posthog-js'
 
 export default {
   name: 'posts',
@@ -133,10 +134,13 @@ export default {
         })
           .then(() => {
             this.getPosts()
+            posthog.capture('post_created', { message_length: this.message.length })
             this.message = ''
           })
           .catch(e => {
             this.errors.push(e)
+            posthog.captureException(e, { event: 'post_create_failed' })
+            posthog.capture('post_create_failed')
           })
       }
     }
